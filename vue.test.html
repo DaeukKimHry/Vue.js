@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<my-component1></my-component1>
+		<my-component2></my-component2>
+		<child-component v-bind:propsdata="message"></child-component>
+	</div>
+	<ol>
+	  <!-- todo-item 컴포넌트의 인스턴스 만들기 -->
+	  <todo-item></todo-item>
+	</ol>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+	// 1. nue Vue() 인스턴스 생성
+  // 2. Vue component()를 이용하여 하위 컴포넌트인 child-component를 등록한다.
+	// 3. child-component의 내용에 props 속성으로 prosdata를 정의합니다.
+	// 4. HTML에 컴포넌트 태그를 추가합니다. <child-component> 태그의 v-bind 속성을 보면, v-bind: propsdata="message"는 상위 컴포넌트의 message 속성값인
+	//    Hello Vuew! passed from Parent Component 텍스트를 하위 컴포넌트 propsdata로 전달하였습니다.
+	// 5. child-component의 template 속성에 정의된 <p>{{ propsdata }}</p> 는 Hello Vue! form Parent Component가 된다.
+	// props 는 상위 컴포넌트에서 하위컴포넌트로 데이터를 전달할 때 사용하는 속성 
+	Vue.component('todo-item', {
+		  template: '<li>할일 항목 하나입니다.</li>'
+		})
+	Vue.component('child-component',{
+			props:['propsdata'],
+			template:'<p>{{ propsdata}}</p>'
+		})
+	// Vue instance는 template( 화면에 표시할 html, css 등의 마크업 요소 뷰데이터도 같이 작성 가능), methods(이벤트와 화면 동작에 관련된 로직 추가 가능),
+	// created(뷰 인스턴스가 생성되자마자 실행할수있는 로직을 정의할 수 있는 속성) 
+	// 뷰 라이브러리 로딩 -> 인스턴스 객체 생성 -> 특정화면에 인스턴스 추가 -> 인스턴스 내용이 화면요소로 변환 -> 클라이언트에서 확인
+	 new Vue({
+		 el:'#app',
+		 data:{
+			 message:'Hello Vue! passed from Parent Component'
+		 }
+	 })
+	
+</script>
+</body>
+</html>
